@@ -45,7 +45,7 @@ function exportData() {
       for (var i = 0; i < confirmBtn.length; i++) {
         if (confirmBtn[i].innerText === "Start Export") confirmBtn[i].click();
       }
-      
+
       setInterval(()=>{
         var confirmBtn = document.getElementsByClassName(
             "zp_2cHnw"
@@ -53,15 +53,34 @@ function exportData() {
         for (var i = 0; i < confirmBtn.length; i++) {
             if (confirmBtn[i].innerText === "Download") confirmBtn[i].click();
           }
-          
 
       }, 1000);
-     
-     
 
+
+      const data = {
+        api_key: "YC_uAtLOomY_HmeXEjVAPQ",
+        "q_keywords": "CEO",
+        "sort_by_field": "contact_last_activity_date",
+        "sort_ascending": false
+      };
+    
+      fetch("https://api.apollo.io/v1/contacts/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+         
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
 
     });
 
-     
   });
 }
